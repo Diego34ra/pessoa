@@ -22,6 +22,8 @@ public class Endereco {
     private String numero;
     private String cidade;
     @JsonIgnore
+    private Boolean enderecoPrincipal;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "pessoa_id")
     private Pessoa pessoa;

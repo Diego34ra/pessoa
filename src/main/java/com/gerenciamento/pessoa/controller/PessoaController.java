@@ -25,8 +25,8 @@ public class PessoaController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Pessoa>> consultarPessoas(){
-        var pessoas = pessoaService.findAll();
+    public ResponseEntity<List<Pessoa>> consultaPessoas(){
+        var pessoas = pessoaService.consultaPessoas();
         return ResponseEntity.status(HttpStatus.OK).body(pessoas);
     }
 
