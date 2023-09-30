@@ -23,7 +23,6 @@ public class PessoaService {
 
     public MessageResponseDTO create(Pessoa pessoa){
         pessoaRepository.save(pessoa);
-        System.out.println(pessoa.getId());
         List<Endereco> enderecoList = getEndereco(pessoa.getEnderecos(),pessoa);
         enderecoRepository.saveAll(enderecoList);
         return MessageResponseDTO
@@ -39,7 +38,7 @@ public class PessoaService {
         return pessoaList;
     }
 
-    public Pessoa findById(Integer id) throws ResourceNotFoundException {
+    public Pessoa consultarPessoa(Integer id) throws ResourceNotFoundException {
         return verificaSeExiste(id);
     }
 
@@ -67,13 +66,11 @@ public class PessoaService {
     }
 
     public List<Endereco> getEndereco(List<Endereco> enderecoList, Pessoa pessoa){
-        IntStream.range(0, enderecoList.size())
-                .forEach(index -> {
-                    Endereco endereco = enderecoList.get(index);
-                    endereco.setEnderecoPrincipal(index == 0);
-                    endereco.setPessoa(pessoa);
-                });
-        return enderecoList;
+        return enderecoList.stream().map( endereco -> {
+            endereco.setEnderecoPrincipal(false);
+            endereco.setPessoa(pessoa);
+            return endereco;
+        }).collect(Collectors.toList());
     }
 
 }

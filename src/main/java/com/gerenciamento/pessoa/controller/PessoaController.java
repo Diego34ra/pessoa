@@ -20,7 +20,7 @@ public class PessoaController {
 
     @GetMapping("{id}")
     public ResponseEntity<Pessoa> consultarPessoa(@PathVariable Integer id) throws ResourceNotFoundException {
-        var pessoa = pessoaService.findById(id);
+        var pessoa = pessoaService.consultarPessoa(id);
         return ResponseEntity.status(HttpStatus.OK).body(pessoa);
     }
 
@@ -32,8 +32,8 @@ public class PessoaController {
 
     @PostMapping
     public ResponseEntity<MessageResponseDTO> criarPessoa(@RequestBody Pessoa pessoa){
-        var message = pessoaService.create(pessoa);
-        return ResponseEntity.status(HttpStatus.CREATED).body(message);
+        var mensagem = pessoaService.create(pessoa);
+        return ResponseEntity.status(HttpStatus.CREATED).body(mensagem);
     }
 
     @PutMapping("{id}")
