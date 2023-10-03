@@ -61,4 +61,40 @@ public class PessoaServiceTests {
         Assertions.assertEquals("Teste",pessoaConsulta.getNome());
 
     }
+
+    @Test
+    public void consultarPessoasTest() throws ResourceNotFoundException {
+        Pessoa pessoa = new Pessoa();
+
+        pessoa.setNome("Teste");
+        pessoa.setDataDeNascimento(Date.valueOf(LocalDate.now()));
+        List<Endereco> enderecoList = new ArrayList<>();
+        pessoa.setEnderecos(enderecoList);
+        pessoaRepository.save(pessoa);
+
+        List<Pessoa> pessoaList = pessoaService.consultarPessoas();
+
+        Assertions.assertEquals(1,pessoaList.size());
+
+    }
+
+    @Test
+    public void updatePessoaTest() throws ResourceNotFoundException {
+        Pessoa pessoa = new Pessoa();
+
+        pessoa.setNome("Teste");
+        pessoa.setDataDeNascimento(Date.valueOf(LocalDate.now()));
+        List<Endereco> enderecoList = new ArrayList<>();
+        pessoa.setEnderecos(enderecoList);
+        pessoaRepository.save(pessoa);
+
+        pessoa.setNome("Diego");
+        pessoa.setDataDeNascimento(Date.valueOf(LocalDate.now()));
+        pessoaService.updatePessoa(1,pessoa);
+
+        String nome = pessoaRepository.findById(1).get().getNome();
+
+        Assertions.assertEquals("Diego",nome);
+
+    }
 }

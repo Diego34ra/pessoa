@@ -40,7 +40,7 @@ public class PessoaService {
                 .build();
     }
 
-    public List<Pessoa> consultaPessoas(){
+    public List<Pessoa> consultarPessoas(){
         List<Pessoa> pessoaList = pessoaRepository.findAll();
         return pessoaList;
     }
