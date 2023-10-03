@@ -6,6 +6,8 @@ import com.gerenciamento.pessoa.model.Endereco;
 import com.gerenciamento.pessoa.model.Pessoa;
 import com.gerenciamento.pessoa.repository.EnderecoRepository;
 import com.gerenciamento.pessoa.repository.PessoaRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Service
+@AllArgsConstructor
+@NoArgsConstructor
 public class PessoaService {
 
     @Autowired
@@ -23,8 +27,11 @@ public class PessoaService {
 
     public MessageResponseDTO create(Pessoa pessoa){
         pessoaRepository.save(pessoa);
-        List<Endereco> enderecoList = getEndereco(pessoa.getEnderecos(),pessoa);
-        enderecoRepository.saveAll(enderecoList);
+        if(!pessoa.getEnderecos().isEmpty()) {
+            List<Endereco> enderecoList = getEndereco(pessoa.getEnderecos(), pessoa);
+            enderecoRepository.saveAll(enderecoList);
+        }
+
         return MessageResponseDTO
                 .builder()
                 .code(201)
