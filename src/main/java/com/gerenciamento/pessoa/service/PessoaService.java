@@ -25,7 +25,7 @@ public class PessoaService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
-    public MessageResponseDTO create(Pessoa pessoa){
+    public MessageResponseDTO criarPessoa(Pessoa pessoa){
         pessoaRepository.save(pessoa);
         if(!pessoa.getEnderecos().isEmpty()) {
             List<Endereco> enderecoList = getEndereco(pessoa.getEnderecos(), pessoa);
@@ -55,7 +55,7 @@ public class PessoaService {
         return pessoa;
     }
 
-    public MessageResponseDTO updatePessoa(Integer id, Pessoa pessoaUpdate) throws ResourceNotFoundException {
+    public MessageResponseDTO atualizaPessoa(Integer id, Pessoa pessoaUpdate) throws ResourceNotFoundException {
         Pessoa pessoa = verificaSeExiste(id);
         if(pessoaUpdate.getNome() != null){
             pessoa.setNome(pessoaUpdate.getNome());

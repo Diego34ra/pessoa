@@ -24,21 +24,21 @@ public class PessoaController {
         return ResponseEntity.status(HttpStatus.OK).body(pessoa);
     }
 
-    @GetMapping()
-    public ResponseEntity<List<Pessoa>> consultaPessoas(){
+    @GetMapping
+    public ResponseEntity<List<Pessoa>> consultarPessoas(){
         var pessoas = pessoaService.consultarPessoas();
         return ResponseEntity.status(HttpStatus.OK).body(pessoas);
     }
 
     @PostMapping
     public ResponseEntity<MessageResponseDTO> criarPessoa(@RequestBody Pessoa pessoa){
-        var mensagem = pessoaService.create(pessoa);
+        var mensagem = pessoaService.criarPessoa(pessoa);
         return ResponseEntity.status(HttpStatus.CREATED).body(mensagem);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<MessageResponseDTO> atualizarPessoa(@PathVariable Integer id, @RequestBody Pessoa pessoa) throws ResourceNotFoundException {
-        var mensagem = pessoaService.updatePessoa(id,pessoa);
+    public ResponseEntity<MessageResponseDTO> atualizaPessoa(@PathVariable Integer id, @RequestBody Pessoa pessoa) throws ResourceNotFoundException {
+        var mensagem = pessoaService.atualizaPessoa(id,pessoa);
         return ResponseEntity.status(HttpStatus.OK).body(mensagem);
     }
 }

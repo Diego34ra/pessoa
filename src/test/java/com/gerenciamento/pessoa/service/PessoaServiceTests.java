@@ -28,14 +28,13 @@ public class PessoaServiceTests {
     private PessoaRepository pessoaRepository;
 
     @Test
-    public void createTest(){
+    public void criarPessoaTest(){
         Pessoa pessoa = new Pessoa();
-
         pessoa.setNome("Teste");
         pessoa.setDataDeNascimento(Date.valueOf(LocalDate.now()));
         List<Endereco> enderecoList = new ArrayList<>();
         pessoa.setEnderecos(enderecoList);
-        pessoaService.create(pessoa);
+        pessoaService.criarPessoa(pessoa);
 
         int tamanho = pessoaRepository.findAll().size();
         String nome = pessoaRepository.findById(1).get().getNome();

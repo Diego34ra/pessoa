@@ -23,6 +23,6 @@ public class Pessoa {
     private Integer id;
     private String nome;
     private Date dataDeNascimento;
-    @OneToMany(mappedBy = "pessoa")
+    @OneToMany(mappedBy = "pessoa", fetch = FetchType.EAGER)
     private List<Endereco> enderecos;
 }

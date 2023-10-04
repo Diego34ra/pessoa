@@ -45,7 +45,7 @@ public class EnderecoService {
     public ResponseEntity<MessageResponseDTO> definirEnderecoPrincipal(Integer pessoaId, Integer enderecoId) throws ResourceNotFoundException {
         Pessoa pessoa = pessoaService.consultarPessoa(pessoaId);
         Endereco endereco = consultarEndereco(enderecoId);
-        if(endereco.getPessoa().equals(pessoa)){
+        if(endereco.getPessoa().getId().equals(pessoa.getId())){
             pessoa.getEnderecos().forEach(e -> e.setEnderecoPrincipal(false)); // Desmarca todos os outros como não principais
             endereco.setEnderecoPrincipal(true); // Marca este como principal
             enderecoRepository.save(endereco);
